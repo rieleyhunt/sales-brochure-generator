@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from gptLinkCleanser import fetch_page_and_all_relevant_links
+import gradio as gr
 
 load_dotenv(override=True)
 api_key = os.getenv('OPENAI_API_KEY')
@@ -22,11 +23,24 @@ def brochureGenerator(url, model):
     ]
     response = openai.chat.completions.create(
         messages=messages,
-        model=model
+        model=model,
+        stream=True
     )
-    return response.choices[0].message.content
+    result = ""
+    for chunk in response:
+        result += chunk.choices[0].delta.content or ""
+        yield result
 
-url = "https://sprypoint.com"
-model = "gpt-5.1"
-brochure = brochureGenerator(url, model)
-print(brochure)
+url = "https://rieley.ca"
+model = "gpt-5-nano"
+
+gradio_interface = gr.Interface(
+    fn=brochureGenerator,
+    inputs=[gr.Textbox(label="Website URL"), gr.Dropdown(choices=["gpt-4o", "gpt-5-nano"], label="Model")],
+    outputs="markdown",
+    flagging_mode="never",
+    title="Sales Brochure Generator",
+    examples=[["https://rieley.ca", "gpt-5-nano"], ["https://sprypoint.com", "gpt-5-nano"]]
+)
+
+gradio_interface.launch(inbrowser=True)
