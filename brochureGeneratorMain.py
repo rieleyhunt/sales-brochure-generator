@@ -43,4 +43,4 @@ gradio_interface = gr.Interface(
     examples=[["https://rieley.ca", "gpt-5-nano"], ["https://sprypoint.com", "gpt-5-nano"]]
 )
 
-gradio_interface.launch(inbrowser=True)
+gradio_interface.launch(inbrowser=True, share=True)
