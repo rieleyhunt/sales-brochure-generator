@@ -1,6 +1,6 @@
 
-openai>=1.0.0
-gradio>=1.0.0
-bs4>=1.0.0
-List>=1.0.0
-json>=1.0.0
+openai
+gradio
+bs4
+List
+json
