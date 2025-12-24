@@ -50,5 +50,5 @@ def fetch_page_and_all_relevant_links(url, model):
     result = f"## Landing Page:\n\n{content}\n## Relevant Links:\n"
     for link in relevant_links['links']:
         result += f"\n\n### Link: {link['type']}\n"
-        result += analyze_content(fetch_website_contents_and_links(link['url']), model)
+        result += analyze_content(link['url'], model)
     return result
