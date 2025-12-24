@@ -16,3 +16,4 @@ This is a small project I am working on as part of a LLM Engineering course I am
 ## Try it
 
 You can try it at https://huggingface.co/spaces/rieleyhunt/Sales-Brochure-Generator
+It does take a minute to generate a full brochure...
