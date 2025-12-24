@@ -2,5 +2,4 @@
 openai
 gradio
 bs4
-List
 json
